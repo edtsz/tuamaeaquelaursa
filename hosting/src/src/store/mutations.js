@@ -27,7 +27,7 @@ export const clear = (state) => {
 export const connect_to_box = (state) => {
   var recipient = (state.current_params.email + state._hosting.suffix).toLowerCase();
 
-  state._user_box = state._db.collection('MAILBOXES').doc(recipient).collection('INBOX');
+  state._user_box = state._db.collection('MAILBOXES').doc(recipient).collection('INBOX').limit(3);
 
   console.info('mutation: connect_to_box');
 }
@@ -68,7 +68,7 @@ export const sort_messages = (state) => {
   state.messages.sort((a, b) => {
     console.log('sorting');
     return a.created_at < b.created_at;
-  })
+  });
 
   console.info('mutation: sort_messages ');
 }

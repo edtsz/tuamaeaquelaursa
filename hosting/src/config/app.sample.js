@@ -3,7 +3,12 @@ export const hostingConfig = {
 };
 
 export const firebaseConfig = {
-  apiKey:      "{apiKey}",
-  authDomain:  "{authDomain}",
-  databaseURL: "{databaseURL}",
+  appId:            "{appId}",
+  apiKey:           "{apiKey}",
+  authDomain:       "{authDomain}",
+  databaseURL:      "{databaseURL}",
+  projectId:        "{projectId}",
+  storageBucket:    "{storageBucket}",
+  messagingSenderId:"{messagingSenderId}",
+  appCheckSiteKey:  "{appCheckSiteKey}"
 };

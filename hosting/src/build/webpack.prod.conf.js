@@ -164,6 +164,11 @@ const webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       },
       {
+        from: path.resolve(__dirname, '../robots.txt'),
+        to: '.',
+        ignore: ['.*']
+      },
+      {
         from: path.resolve(__dirname, '../static'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']

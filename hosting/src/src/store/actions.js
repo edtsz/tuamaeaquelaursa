@@ -27,9 +27,13 @@ export const hydrate_messages = ({ commit, state }, params) => {
     return;
   }
 
+  if ( state._unsubscribe ) {
+    state._unsubscribe();
+    state._unsubscribe = null;
+  }
+
   state._unsubscribe = state._user_box
     .onSnapshot((querySnapshot) => {
-
       querySnapshot.docChanges().forEach((change) => {
         var res = change.doc.data();
         res.key = change.doc.id;

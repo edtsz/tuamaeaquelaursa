@@ -7,7 +7,7 @@ import * as mutations from './mutations'
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-
+import 'firebase/compat/app-check';
 
 import { hostingConfig, firebaseConfig } from '@/../config/app.js';
 import router from '@/router';
@@ -36,6 +36,25 @@ const state = {
   _user_box: null,
   _unsubscribe: null,
   _db : firebase.initializeApp(firebaseConfig).firestore(),
+}
+
+// Initialize App Check with reCAPTCHA v3
+if (firebaseConfig.appCheckSiteKey) {
+  try {
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      // This will show the local development debug token in console
+      self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+      console.log('=== App Check Debug Mode Enabled ===');
+      console.log('Add the debug token shown above to Firebase Console');
+    }
+
+    firebase.appCheck().activate(
+      firebaseConfig.appCheckSiteKey,
+      true // isTokenAutoRefreshEnabled
+    );
+  } catch (error) {
+    console.error('App Check initialization failed:', error);
+  }
 }
 
 state.message = state.loading;
